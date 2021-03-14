@@ -1,4 +1,4 @@
-firebase.js
+src/config
 node_modules
 .DS_Store
 dist
