@@ -11,6 +11,15 @@
         >
           Home
         </router-link>
+
+        <router-link
+          v-if="!isAuthenticated"
+          to="/SignUp"
+          class="btn btn-ghost btn-sm rounded-btn hover:text-content-100 font-bold text-orange-600"
+        >
+          SignUp
+        </router-link>
+
         <router-link
           v-if="!isAuthenticated"
           to="/login"
