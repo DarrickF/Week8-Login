@@ -4,8 +4,21 @@
   >
     <form @submit.prevent class="flex flex-col w-full p-12 rounded shadow-lg">
       <label
-        for="username"
+        v-if="form == 'signup'"
+        for="name"
         class="self-start text-xs font-semibold text-content-200"
+        >Name</label
+      >
+      <input
+        v-if="form == 'signup'"
+        id="name"
+        type="text"
+        class="flex items-center h-12 px-4 mt-2 bg-gray-300 rounded focus:outline-none focus:ring-2"
+        v-model="name"
+      />
+      <label
+        for="username"
+        class="self-start mt-3 text-xs font-semibold text-content-200"
         >Email</label
       >
       <input
@@ -49,7 +62,7 @@
 <script setup>
 import { ref, defineProps } from 'vue'
 import { useRouter } from 'vue-router'
-import { signIn, signUp, googlePopup } from '../helpers/useAuth'
+import { signIn, signUp, googlePopup, auth } from '../helpers/useAuth'
 const router = useRouter()
 const login = async () => {
   try {
@@ -62,6 +75,8 @@ const login = async () => {
 const register = async () => {
   try {
     await signUp(email.value, password.value)
+    const user = auth().currentUser
+    await user.updateProfile({ displayName: name.value })
     router.push('/')
   } catch (error) {
     console.log(error)
@@ -79,6 +94,7 @@ const google = async () => {
 
 const email = ref('')
 const password = ref('')
+const name = ref('')
 defineProps({
   form: {
     type: String,

@@ -5,7 +5,7 @@ import { useAuth } from '@vueuse/firebase'
 
 firebase.initializeApp(firebaseConfig)
 
-const { auth } = firebase
+export const { auth } = firebase
 
 export const { isAuthenticated, user } = useAuth()
 
