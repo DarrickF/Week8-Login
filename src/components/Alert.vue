@@ -14,7 +14,11 @@
           d="M18.364 18.364A9 9 0 005.636 5.636m12.728 12.728A9 9 0 015.636 5.636m12.728 12.728L5.636 5.636"
         ></path>
       </svg>
-      <label>Lorem ipsum dolor sit amet, consectetur adip!</label>
+      <label>{{ msg }}</label>
     </div>
   </div>
 </template>
+
+<script setup>
+import { msg } from '../helpers/useError.js'
+</script>

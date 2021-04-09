@@ -63,12 +63,16 @@
 import { ref, defineProps } from 'vue'
 import { useRouter } from 'vue-router'
 import { signIn, signUp, googlePopup, auth } from '../helpers/useAuth'
+import { isError, msg } from '../helpers/useError.js'
 const router = useRouter()
 const login = async () => {
   try {
     await signIn(email.value, password.value)
+    isError.value = false
     router.push('/')
   } catch (error) {
+    isError.value = true
+    msg.value = 'There was an Authentication Error'
     console.log(error)
   }
 }
@@ -77,6 +81,8 @@ const register = async () => {
     await signUp(email.value, password.value)
     const user = auth().currentUser
     await user.updateProfile({ displayName: name.value })
+
+    isError.value = false
     router.push('/')
   } catch (error) {
     console.log(error)
@@ -86,6 +92,8 @@ const register = async () => {
 const google = async () => {
   try {
     await googlePopup()
+    isError.value = false
+
     router.push('/')
   } catch (error) {
     console.log(error)
