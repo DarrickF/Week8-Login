@@ -1,4 +1,5 @@
 <template>
+  <Alert />
   <div class="navbar mb-2 shadow-lg bg-coolGray-600 text-content-100">
     <div class="flex-1 px-2 mx-2">
       <span class="text-lg font-bold text-orange-600"> LoginExample </span>
