@@ -131,7 +131,12 @@ const login = async () => {
 ////////////////////Register Function//////////////////
 const register = async () => {
   try {
-    if (nameMeta.valid && emailMeta.valid && passwordMeta.valid) {
+    if (
+      nameMeta.valid &&
+      emailMeta.valid &&
+      passwordMeta.valid &&
+      passwordConfirmationMeta.valid
+    ) {
       await signUp(email.value, password.value)
       const user = auth().currentUser
       await user.updateProfile({ displayName: name.value })
@@ -171,8 +176,11 @@ const {
 } = useField('password', yup.string().required().min(8))
 
 const passwordConfirmationFn = () => {
-  return password.value == passwordConfirmation.value
-  return true
+  if (password.value == passwordConfirmation.value) {
+    return true
+  } else {
+    return "Password doesn't match"
+  }
 }
 
 const {
